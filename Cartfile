@@ -1,0 +1,2 @@
+# Require version 3.0 beta 7 or later
+github "ReactiveCocoa/ReactiveCocoa" "v3.0-beta.7"
