@@ -6,6 +6,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="youtube_dl" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="vRm-27-t9f" id="oyo-oO-KSm"/>
+                <outlet property="downloadButton" destination="b1z-tV-p38" id="w1n-ma-pTa"/>
+                <outlet property="downloadPathControl" destination="uWi-hj-vlN" id="Dof-L1-0gM"/>
+                <outlet property="downloadURLTextField" destination="NRz-zs-Oxy" id="BMG-WR-7QI"/>
+                <outlet property="outputTextView" destination="5aq-2p-Ggl" id="H2A-0o-LzI"/>
+                <outlet property="progressIndicator" destination="p3P-2e-GQr" id="VpY-zf-mMV"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -14,17 +20,136 @@
         <window title="YouTube Downloader" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="592"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
-            <value key="minSize" type="size" width="480" height="270"/>
+            <value key="minSize" type="size" width="480" height="592"/>
+            <value key="maxSize" type="size" width="480" height="592"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="5" width="480" height="592"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bps-Z4-E9W">
+                        <rect key="frame" x="18" y="555" width="114" height="18"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Download URL:" id="e3l-vP-juZ">
+                            <font key="font" metaFont="system" size="15"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SIi-iM-hbv">
+                        <rect key="frame" x="18" y="499" width="108" height="18"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save Location:" id="iCg-ns-kJ4">
+                            <font key="font" metaFont="system" size="15"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRz-zs-Oxy">
+                        <rect key="frame" x="20" y="525" width="440" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="c3R-ed-MYn">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uWi-hj-vlN">
+                        <rect key="frame" x="17" y="467" width="446" height="26"/>
+                        <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Ph6-CQ-TyW">
+                            <font key="font" metaFont="system"/>
+                            <url key="url" string="file:///Users/idik/Desktop/"/>
+                        </pathCell>
+                    </pathControl>
+                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hie-eI-Lsz">
+                        <rect key="frame" x="12" y="460" width="456" height="5"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4v-8w-54q">
+                        <rect key="frame" x="20" y="61" width="440" height="393"/>
+                        <clipView key="contentView" id="JzW-El-8hu">
+                            <rect key="frame" x="1" y="1" width="223" height="133"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="5aq-2p-Ggl">
+                                    <rect key="frame" x="0.0" y="0.0" width="223" height="391"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="438" height="391"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="438" height="391"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="CwE-d6-2gZ">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="4Bk-eR-uiz">
+                            <rect key="frame" x="224" y="1" width="15" height="133"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-tV-p38">
+                        <rect key="frame" x="364" y="13" width="102" height="32"/>
+                        <buttonCell key="cell" type="push" title="Download" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ese-Us-AEA">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onDownloadButtonPress:" target="-2" id="572-Rc-uVW"/>
+                        </connections>
+                    </button>
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-2e-GQr">
+                        <rect key="frame" x="20" y="22" width="16" height="16"/>
+                    </progressIndicator>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vRm-27-t9f">
+                        <rect key="frame" x="281" y="13" width="83" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sJr-XE-3Le">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onCancelButtonPress:" target="-2" id="0L3-fl-km6"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NRz-zs-Oxy" firstAttribute="top" secondItem="bps-Z4-E9W" secondAttribute="bottom" constant="8" id="0JM-2U-nkn"/>
+                    <constraint firstAttribute="trailing" secondItem="hie-eI-Lsz" secondAttribute="trailing" constant="12" id="0MS-FX-muL"/>
+                    <constraint firstAttribute="trailing" secondItem="NRz-zs-Oxy" secondAttribute="trailing" constant="20" id="1Yg-9W-DPS"/>
+                    <constraint firstItem="b1z-tV-p38" firstAttribute="centerY" secondItem="vRm-27-t9f" secondAttribute="centerY" id="4OY-eS-gLg"/>
+                    <constraint firstAttribute="trailing" secondItem="uWi-hj-vlN" secondAttribute="trailing" constant="20" id="7Cu-Cg-e8s"/>
+                    <constraint firstAttribute="trailing" secondItem="y4v-8w-54q" secondAttribute="trailing" constant="20" id="GfD-IT-ELn"/>
+                    <constraint firstItem="SIi-iM-hbv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Hug-gE-XEh"/>
+                    <constraint firstItem="bps-Z4-E9W" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="IrO-3M-22G"/>
+                    <constraint firstAttribute="bottom" secondItem="b1z-tV-p38" secondAttribute="bottom" constant="20" id="PB9-O6-iDi"/>
+                    <constraint firstItem="SIi-iM-hbv" firstAttribute="top" secondItem="NRz-zs-Oxy" secondAttribute="bottom" constant="8" id="TD7-nV-tTJ"/>
+                    <constraint firstAttribute="trailing" secondItem="b1z-tV-p38" secondAttribute="trailing" constant="20" id="cK9-KI-fa5"/>
+                    <constraint firstItem="p3P-2e-GQr" firstAttribute="centerY" secondItem="vRm-27-t9f" secondAttribute="centerY" constant="0.5" id="dOd-J3-FpN"/>
+                    <constraint firstItem="uWi-hj-vlN" firstAttribute="top" secondItem="SIi-iM-hbv" secondAttribute="bottom" constant="8" id="fmK-dG-8ka"/>
+                    <constraint firstItem="b1z-tV-p38" firstAttribute="leading" secondItem="vRm-27-t9f" secondAttribute="trailing" constant="12" id="gLj-3Q-oDy"/>
+                    <constraint firstItem="NRz-zs-Oxy" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="hHd-7q-EXw"/>
+                    <constraint firstItem="hie-eI-Lsz" firstAttribute="top" secondItem="uWi-hj-vlN" secondAttribute="bottom" constant="8" id="hIs-gI-VCW"/>
+                    <constraint firstItem="hie-eI-Lsz" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="12" id="jGP-P7-Pj1"/>
+                    <constraint firstItem="y4v-8w-54q" firstAttribute="top" secondItem="hie-eI-Lsz" secondAttribute="bottom" constant="8" id="jqR-eb-hse"/>
+                    <constraint firstItem="bps-Z4-E9W" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="19" id="k12-bQ-trj"/>
+                    <constraint firstItem="uWi-hj-vlN" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="lb4-PW-LZ5"/>
+                    <constraint firstItem="y4v-8w-54q" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="mDa-Ry-6bu"/>
+                    <constraint firstItem="vRm-27-t9f" firstAttribute="top" secondItem="y4v-8w-54q" secondAttribute="bottom" constant="20" id="nPL-Jm-7rl"/>
+                    <constraint firstItem="p3P-2e-GQr" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="xD9-CS-BWG"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="612" y="458"/>
+            <point key="canvasLocation" x="626" y="334"/>
         </window>
     </objects>
 </document>
