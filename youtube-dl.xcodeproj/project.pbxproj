@@ -17,6 +17,8 @@
 		4D2B31811B1C767600D35766 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D2B317C1B1C767600D35766 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4D2B31821B1C767600D35766 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D2B317D1B1C767600D35766 /* Result.framework */; };
 		4D2B31831B1C767600D35766 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D2B317D1B1C767600D35766 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D9511881B22D7C6003E9436 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9511861B22D7C6003E9436 /* MainWindowController.swift */; };
+		4D9511891B22D7C6003E9436 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9511871B22D7C6003E9436 /* MainWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		4D2B317B1B1C767600D35766 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/Mac/Box.framework; sourceTree = "<group>"; };
 		4D2B317C1B1C767600D35766 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/Mac/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		4D2B317D1B1C767600D35766 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		4D9511861B22D7C6003E9436 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		4D9511871B22D7C6003E9436 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +121,6 @@
 			children = (
 				4D2B31601B1C73CD00D35766 /* AppDelegate.swift */,
 				4D2B31621B1C73CD00D35766 /* Images.xcassets */,
-				4D2B31641B1C73CD00D35766 /* MainMenu.xib */,
 				4D2B315F1B1C73CD00D35766 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -161,6 +164,9 @@
 		4D2B318F1B1C77AE00D35766 /* VIEWS */ = {
 			isa = PBXGroup;
 			children = (
+				4D2B31641B1C73CD00D35766 /* MainMenu.xib */,
+				4D9511861B22D7C6003E9436 /* MainWindowController.swift */,
+				4D9511871B22D7C6003E9436 /* MainWindowController.xib */,
 			);
 			name = VIEWS;
 			path = 03_VIEW;
@@ -272,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D2B31631B1C73CD00D35766 /* Images.xcassets in Resources */,
+				4D9511891B22D7C6003E9436 /* MainWindowController.xib in Resources */,
 				4D2B31661B1C73CD00D35766 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9511881B22D7C6003E9436 /* MainWindowController.swift in Sources */,
 				4D2B31611B1C73CD00D35766 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +327,7 @@
 				4D2B31651B1C73CD00D35766 /* Base */,
 			);
 			name = MainMenu.xib;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -489,6 +498,7 @@
 				4D2B31771B1C73CD00D35766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D2B31781B1C73CD00D35766 /* Build configuration list for PBXNativeTarget "youtube-dlTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +507,7 @@
 				4D2B317A1B1C73CD00D35766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
