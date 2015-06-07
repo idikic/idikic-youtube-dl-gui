@@ -33,14 +33,15 @@ class MainWindowController: NSWindowController {
     // MARK - Propertys
     var isRunning = false
     var runningTask: NSTask?
+    var outputPipe: NSPipe?
     var debug = true
 
     // MARK - Lifecycle
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self,
+        NSNotificationCenter.defaultCenter()
+                            .addObserver(self,
                                         selector: "updateUI",
                                         name: NSTaskDidTerminateNotification,
                                         object: nil)
@@ -72,6 +73,8 @@ class MainWindowController: NSWindowController {
             }
 
             self.runningTask = self.createTask(binaryPath, arguments: arguments, outputPath: outputPath)
+            self.outputPipe = self.createOutputPipe(self.runningTask)
+
             self.runningTask!.launch()
             self.updateUI()
             self.runningTask!.waitUntilExit()
@@ -90,6 +93,39 @@ class MainWindowController: NSWindowController {
         }
 
         return task
+    }
+
+    func createOutputPipe(runningTask: NSTask!) -> NSPipe {
+        var pipe = NSPipe()
+        runningTask.standardOutput = pipe
+
+        pipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+
+        NSNotificationCenter
+            .defaultCenter()
+            .addObserverForName(NSFileHandleDataAvailableNotification,
+                                object: pipe.fileHandleForReading,
+                                queue: nil) {
+
+            notification in
+
+                var output = pipe.fileHandleForReading.availableData
+                var outputString = NSString(data: output, encoding: NSUTF8StringEncoding)
+
+                dispatch_sync(dispatch_get_main_queue()) {
+
+                    Void in
+
+                    self.outputTextView.string = self.outputTextView.string! + "\n" + (outputString as! String)
+
+                    var range = NSMakeRange(count(self.outputTextView.string!), 0)
+                    self.outputTextView.scrollRangeToVisible(range)
+                }
+
+                pipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        }
+
+        return pipe
     }
 
     func updateUI() {
