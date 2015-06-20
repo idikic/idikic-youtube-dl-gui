@@ -45,8 +45,8 @@ class MainWindowController: NSWindowController {
         var outputPath = self.downloadPathControl.URL?.path
 
         viewModel.active <~ isActiveSignal
-        viewModel.downloadURL <~ textSignal(downloadURLTextField)
-        viewModel.outputPath <~ textSignal(downloadPathControl, self)
+        viewModel.downloadURL <~ downloadURLTextField.rac_textSignalProducer()
+        viewModel.outputPath <~ downloadPathControl.rac_textSignalProducer()
 
         viewModel.taskRunning.producer
             |> start(next: { isTaskRunning in
@@ -75,7 +75,7 @@ class MainWindowController: NSWindowController {
 
     @IBAction func onPathControlPress(sender: NSPathControl) {
         if let outputPath = sender.URL?.path {
-            viewModel.outputPath.put(outputPath)
+            //viewModel.outputPath.put(outputPath)
         }
     }
 }
