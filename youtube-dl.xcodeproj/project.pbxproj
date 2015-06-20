@@ -19,6 +19,8 @@
 		4D2B31831B1C767600D35766 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D2B317D1B1C767600D35766 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4D9511881B22D7C6003E9436 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9511861B22D7C6003E9436 /* MainWindowController.swift */; };
 		4D9511891B22D7C6003E9436 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9511871B22D7C6003E9436 /* MainWindowController.xib */; };
+		4DE5B9D71B347A2C00DC9C7A /* MainWindowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5B9D61B347A2C00DC9C7A /* MainWindowViewModel.swift */; };
+		4DE5B9DB1B35581900DC9C7A /* RAC+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5B9DA1B35581900DC9C7A /* RAC+Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		4D2B317D1B1C767600D35766 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
 		4D9511861B22D7C6003E9436 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		4D9511871B22D7C6003E9436 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
+		4DE5B9D61B347A2C00DC9C7A /* MainWindowViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowViewModel.swift; sourceTree = "<group>"; };
+		4DE5B9DA1B35581900DC9C7A /* RAC+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RAC+Utilities.swift"; path = "../../../../Documents/RAC+Utilities.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 		4D2B318E1B1C77A600D35766 /* HELPERS */ = {
 			isa = PBXGroup;
 			children = (
+				4DE5B9DA1B35581900DC9C7A /* RAC+Utilities.swift */,
 			);
 			name = HELPERS;
 			path = 00_HELPERS;
@@ -183,6 +188,7 @@
 		4D2B31911B1C77C600D35766 /* VIEW MODELS */ = {
 			isa = PBXGroup;
 			children = (
+				4DE5B9D61B347A2C00DC9C7A /* MainWindowViewModel.swift */,
 			);
 			name = "VIEW MODELS";
 			path = 04_VIEW_MODEL;
@@ -299,6 +305,8 @@
 			files = (
 				4D9511881B22D7C6003E9436 /* MainWindowController.swift in Sources */,
 				4D2B31611B1C73CD00D35766 /* AppDelegate.swift in Sources */,
+				4DE5B9D71B347A2C00DC9C7A /* MainWindowViewModel.swift in Sources */,
+				4DE5B9DB1B35581900DC9C7A /* RAC+Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
