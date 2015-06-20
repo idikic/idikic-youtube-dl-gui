@@ -24,9 +24,11 @@ class MainWindowViewModel {
     // MARK: - Output
     let taskRunning = MutableProperty<Bool>(false)
     let debugOutput = MutableProperty<String>("")
+    let downloadButtonEnabled = MutableProperty<Bool>(false)
 
     private let binaryPath = "/usr/local/bin/youtube-dl"
-
+    private let downloadURLValidated = MutableProperty<Bool>(false)
+    private let outputPathValidated = MutableProperty<Bool>(false)
 
     // MARK: - Init
     init() {
@@ -36,6 +38,18 @@ class MainWindowViewModel {
 
     // MARK: - Signals
     private func setupSignals() {
+
+    downloadURLValidated <~ downloadURL.producer
+                                |> map { isValidURL in
+                                    isValidURL.lowercaseString.rangeOfString("www.youtube.com") != nil
+                                }
+    outputPathValidated <~ outputPath.producer
+                                |> map { isValidPath in count(isValidPath) > 0 }
+
+    downloadButtonEnabled <~ combineLatest(downloadURLValidated.producer, outputPathValidated.producer)
+                                |> map { validDownloadURL, validOutputPath in
+                                    validDownloadURL && validOutputPath
+                                }
 
     NSNotificationCenter.defaultCenter()
                         .rac_addObserverForName("NSTaskDidTerminateNotification", object: nil)
@@ -47,18 +61,6 @@ class MainWindowViewModel {
         |> filter({ isActive in isActive })
         |> start(next: { _ in
             // TODO: do something on windowDidLoad
-        })
-
-    downloadURL.producer
-        |> filter({ downloadURL in count(downloadURL) > 0 })
-        |> start(next: { url in
-            println(url)
-        })
-
-    outputPath.producer
-        |> filter({ outputURL in count(outputURL) > 0 })
-        |> start(next: { url in
-            println(url)
         })
 
     }

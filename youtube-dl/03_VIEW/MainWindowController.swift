@@ -41,13 +41,13 @@ class MainWindowController: NSWindowController {
     // MARK - Binding
     func bindViewModel() {
 
-        var downloadPath = self.downloadURLTextField.stringValue
-        var outputPath = self.downloadPathControl.URL?.path
-
         viewModel.active <~ isActiveSignal
         viewModel.downloadURL <~ downloadURLTextField.rac_textSignalProducer()
         viewModel.outputPath <~ downloadPathControl.rac_textSignalProducer()
 
+        viewModel.downloadButtonEnabled.producer
+            |> start(next: { [weak self]enabled in self?.downloadButton.enabled = enabled })
+        
         viewModel.taskRunning.producer
             |> start(next: { isTaskRunning in
                 if !isTaskRunning {
@@ -75,7 +75,7 @@ class MainWindowController: NSWindowController {
 
     @IBAction func onPathControlPress(sender: NSPathControl) {
         if let outputPath = sender.URL?.path {
-            //viewModel.outputPath.put(outputPath)
+            viewModel.outputPath.put(outputPath)
         }
     }
 }
