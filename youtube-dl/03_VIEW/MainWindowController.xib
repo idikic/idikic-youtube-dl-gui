@@ -58,6 +58,9 @@
                             <font key="font" metaFont="system"/>
                             <url key="url" string="file:///Users/idik/Desktop/"/>
                         </pathCell>
+                        <connections>
+                            <action selector="onPathControlPress:" target="-2" id="bv7-Xs-0br"/>
+                        </connections>
                     </pathControl>
                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hie-eI-Lsz">
                         <rect key="frame" x="12" y="460" width="456" height="5"/>

@@ -30,6 +30,7 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         sendNext(isActiveSink, true)
+        bindViewModel()
     }
 
     deinit {
@@ -44,8 +45,8 @@ class MainWindowController: NSWindowController {
         var outputPath = self.downloadPathControl.URL?.path
 
         viewModel.active <~ isActiveSignal
-        viewModel.downloadURL <~ textSignal(self.downloadURLTextField)
-
+        viewModel.downloadURL <~ textSignal(downloadURLTextField)
+        viewModel.outputPath <~ textSignal(downloadPathControl, self)
 
         viewModel.taskRunning.producer
             |> start(next: { isTaskRunning in
@@ -72,4 +73,9 @@ class MainWindowController: NSWindowController {
     @IBAction func onDownloadButtonPress(sender: NSButton) {
     }
 
+    @IBAction func onPathControlPress(sender: NSPathControl) {
+        if let outputPath = sender.URL?.path {
+            viewModel.outputPath.put(outputPath)
+        }
+    }
 }

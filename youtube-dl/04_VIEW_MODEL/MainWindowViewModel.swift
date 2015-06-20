@@ -19,7 +19,7 @@ class MainWindowViewModel {
     let active = MutableProperty<Bool>(false)
     let debug = MutableProperty<Bool>(true)
     let downloadURL = MutableProperty<String>("")
-    let outputPath = MutableProperty<NSURL>(NSURL())
+    let outputPath = MutableProperty<String>("")
 
     // MARK: - Output
     let taskRunning = MutableProperty<Bool>(false)
@@ -47,6 +47,18 @@ class MainWindowViewModel {
         |> filter({ isActive in isActive })
         |> start(next: { _ in
             // TODO: do something on windowDidLoad
+        })
+
+    downloadURL.producer
+        |> filter({ downloadURL in count(downloadURL) > 0 })
+        |> start(next: { url in
+            println(url)
+        })
+
+    outputPath.producer
+        |> filter({ outputURL in count(outputURL) > 0 })
+        |> start(next: { url in
+            println(url)
         })
 
     }
