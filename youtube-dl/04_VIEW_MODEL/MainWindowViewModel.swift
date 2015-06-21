@@ -24,17 +24,22 @@ class MainWindowViewModel {
     // MARK: - Output
     let taskRunning = MutableProperty<Bool>(false)
     let debugOutput = MutableProperty<String>("")
-    let downloadButtonEnabled = MutableProperty<Bool>(false)
+    var taskAction: Action<AnyObject?, Bool, NoError>!
 
     private let binaryPath = "/usr/local/bin/youtube-dl"
     private let downloadURLValidated = MutableProperty<Bool>(false)
     private let outputPathValidated = MutableProperty<Bool>(false)
+    private let downloadButtonEnabled = MutableProperty<Bool>(false)
+
 
     // MARK: - Init
     init() {
         setupSignals()
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
     // MARK: - Signals
     private func setupSignals() {
@@ -51,10 +56,31 @@ class MainWindowViewModel {
                                     validDownloadURL && validOutputPath
                                 }
 
+    taskAction = Action<AnyObject?, Bool, NoError>(enabledIf: downloadButtonEnabled) { _ in
+        return SignalProducer.empty
+    }
+
+    taskAction.executing.producer
+        |> start(next: { isExecuting in
+            println(isExecuting)
+        })
+
+    taskAction.values
+        |> observe(next: { nextValueGeneratedByAction in
+            println(nextValueGeneratedByAction)
+        })
+
+    taskAction.errors
+        |> observe(next: { errors in
+            println(errors)
+        })
+
+
     NSNotificationCenter.defaultCenter()
                         .rac_addObserverForName("NSTaskDidTerminateNotification", object: nil)
-                        .subscribeNext { (_) -> Void in
-        self.taskRunning.put(false)
+                        .subscribeNext { [weak self](_) -> Void in
+        // TODO: 
+        // Do something when the task is finished
     }
 
     active.producer
@@ -64,4 +90,5 @@ class MainWindowViewModel {
         })
 
     }
+
 }

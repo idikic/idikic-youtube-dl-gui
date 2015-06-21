@@ -22,9 +22,11 @@ class MainWindowController: NSWindowController {
 
 
     // MARK - Propertys
-    let viewModel = MainWindowViewModel()
-    let (isActiveSignal, isActiveSink) = Signal<Bool, NoError>.pipe()
-
+    private let viewModel = MainWindowViewModel()
+    private let (isActiveSignal, isActiveSink) = Signal<Bool, NoError>.pipe()
+    private lazy var downloadButtonEnabled: DynamicProperty = {
+        return DynamicProperty(object: self.downloadButton, keyPath: "enabled")
+    }()
 
     // MARK - Lifecycle
     override func windowDidLoad() {
@@ -33,31 +35,27 @@ class MainWindowController: NSWindowController {
         bindViewModel()
     }
 
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-
 
     // MARK - Binding
-    func bindViewModel() {
+    private func bindViewModel() {
 
         viewModel.active <~ isActiveSignal
         viewModel.downloadURL <~ downloadURLTextField.rac_textSignalProducer()
         viewModel.outputPath <~ downloadPathControl.rac_textSignalProducer()
 
-        viewModel.downloadButtonEnabled.producer
-            |> start(next: { [weak self]enabled in self?.downloadButton.enabled = enabled })
-        
+        downloadButton.target = CocoaAction(viewModel.taskAction)
+        downloadButton.action = CocoaAction.selector
+
+        downloadButtonEnabled <~ viewModel.taskAction.enabled.producer |> map { $0 as AnyObject }
+
         viewModel.taskRunning.producer
             |> start(next: { isTaskRunning in
                 if !isTaskRunning {
-                    self.downloadButton.enabled = false
                     self.cancelButton.enabled = true
                     self.progressIndicator.startAnimation(self)
                     self.progressIndicator.hidden = false
                     self.outputTextView.string = ""
                 } else {
-                    self.downloadButton.enabled = true
                     self.cancelButton.enabled = false
                     self.progressIndicator.stopAnimation(self)
                     self.progressIndicator.hidden = true
