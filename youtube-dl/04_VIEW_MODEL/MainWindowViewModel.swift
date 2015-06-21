@@ -22,14 +22,17 @@ class MainWindowViewModel {
     let outputPath = MutableProperty<String>("")
 
     // MARK: - Output
-    let taskRunning = MutableProperty<Bool>(false)
     let debugOutput = MutableProperty<String>("")
     var taskAction: Action<AnyObject?, Bool, NoError>!
+    var taskRunning: PropertyOf<Bool> {
+        return PropertyOf(_taskRunning)
+    }
 
     private let binaryPath = "/usr/local/bin/youtube-dl"
     private let downloadURLValidated = MutableProperty<Bool>(false)
     private let outputPathValidated = MutableProperty<Bool>(false)
     private let downloadButtonEnabled = MutableProperty<Bool>(false)
+    private let _taskRunning = MutableProperty<Bool>(false)
 
 
     // MARK: - Init
